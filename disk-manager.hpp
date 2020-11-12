@@ -8,8 +8,10 @@
 class DiskManager
 {
 private:
-	//int startLocation;
+	int numCylinders;
 	Location* firstLocation;
+	void FCFS();
+	void SSTF();
 public:
 	DiskManager();
 	void MakeLocations();
