@@ -10,7 +10,8 @@ DiskManager::DiskManager()
 	std::cout << "Please enter the current location of the arm: ";
 	std::cin >> startLocation;
 	
-	Location* firstLocation = new Location(startLocation);
+	Location* first = new Location(startLocation);
+	firstLocation = first;
 
 	MakeLocations();
 }
@@ -21,4 +22,6 @@ void DiskManager::MakeLocations()
 	std::cout << "Please enter the list of the cylinder numbers for the file: ";
 	std::getline(std::cin, str);
 	int current = 0;
+
+	std::cout << "\n\n" << firstLocation->getCylNum();
 }

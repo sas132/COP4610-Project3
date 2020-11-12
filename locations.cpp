@@ -3,6 +3,7 @@
 Location::Location(int newNum)
 {
 	cylinderNum = newNum;
+	nextLoc = nullptr;
 }
 
 Location::~Location()
@@ -18,4 +19,9 @@ void Location::setNext(Location* newLoc)
 Location* Location::getNext()
 {
 	return nextLoc;
+}
+
+int Location::getCylNum()
+{
+	return cylinderNum;
 }

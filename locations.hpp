@@ -11,6 +11,7 @@ public:
 	~Location();
 	void setNext(Location* newLoc);
 	Location* getNext();
+	int getCylNum();
 };
 
 #endif
