@@ -21,6 +21,27 @@ DiskManager::DiskManager()
 	firstLocation = first;
 
 	MakeLocations();
+
+	bool continuing = true;
+
+	while(continuing) {
+		std::cout << "\n\nPlease enter a choice: 1. FCFS\t2. SSTF\t3. QUIT\t";
+		int choice;
+		std::cin >> choice;
+
+		switch(choice) {
+		case 1:
+			std::cout << "Running the FCFS algorithm now...\n\n";
+			break;
+		case 2:
+			std::cout << "Running the SSTF algorithm now...\n\n";
+			break;
+		case 3:
+			std::cout << "Ending the program now...";
+			continuing = false;
+			break;
+		}
+	}
 }
 
 void DiskManager::MakeLocations()
