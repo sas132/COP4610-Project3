@@ -42,6 +42,14 @@ DiskManager::DiskManager()
 		case 3:
 			std::cout << "Ending the program now...";
 			continuing = false;
+			Location* temp = firstLocation;
+			for(int j = 0; j < numCylinders; j++)
+			{
+				Location* temp2 = temp->getNext();
+				delete temp;
+				temp = temp2;
+			}
+			std::cout << "\n\n";
 			break;
 		}
 	}
@@ -141,23 +149,26 @@ void DiskManager::SSTF()
 		visited[i] = nullptr;
 	}
 
+	visited[0] = current;
+
 	int tempDistance = 1000;
 	for(int j = 0; j < numCylinders -1; j++)
 	{
-		Location* temp = firstLocation;
-		for(int k = 0; k < numCylinders; k++)
+		Location* temp = firstLocation->getNext();
+		int currentCylNum = current->getCylNum();
+		for(int k = 0; k < numCylinders - 1; k++)
 		{
 			int tempCylNum = temp->getCylNum();
-			int currentCylNum = current->getCylNum();
 			bool works = true;
 
 			if(tempCylNum < currentCylNum)
 			{
-				if(tempDistance < currentCylNum - tempCylNum)
+				int currMinTemp = currentCylNum - tempCylNum;
+				if(tempDistance > currMinTemp)
 				{
 					for(int m = 0; m < numCylinders; m++)
 					{
-						if(temp == visited[k])
+						if(temp == visited[m])
 						{
 							works = false;
 						}
@@ -170,11 +181,12 @@ void DiskManager::SSTF()
 			}
 			else if(tempCylNum > currentCylNum)
 			{
-				if(tempDistance < tempCylNum - currentCylNum)
+				int tempMinCurr = tempCylNum - currentCylNum;
+				if(tempDistance > tempMinCurr)
 				{
 					for(int m = 0; m < numCylinders; m++)
 					{
-						if(temp == visited[k])
+						if(temp == visited[m])
 						{
 							works = false;
 						}
@@ -189,7 +201,7 @@ void DiskManager::SSTF()
 			{
 				for(int m = 0; m < numCylinders; m++)
 				{
-					if(temp == visited[k])
+					if(temp == visited[m])
 					{
 						works = false;
 					}
@@ -207,14 +219,19 @@ void DiskManager::SSTF()
 				{
 					tempDistance = tempCylNum - currentCylNum;
 				}
-			}
+				else
+				{
+					tempDistance = 0;
+				}
 
+			}
 			temp = temp->getNext();
 		}
+
 		totalTravel += tempDistance;
 		tempDistance = 1000;
 		std::cout << "\t" << current->getCylNum();
-		visited[visits] = current;
+		visited[visits] = next;
 		visits++;
 		current = next;
 	}
