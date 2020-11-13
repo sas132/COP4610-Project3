@@ -1,3 +1,7 @@
+//Sarah Stevenson
+//COP4610
+//Project 3
+
 #ifndef DISKMANAGER
 #define DISKMANAGER
 
